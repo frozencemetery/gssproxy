@@ -109,7 +109,7 @@
         </variablelist>
         <para>
                 The default setting for <emphasis>GSSPROXY_BEHAVIOR</emphasis>
-                is @GPP_DEFAULT_BEHAVIOR@.
+                is @default_behavior@.
         </para>
 
         <para>

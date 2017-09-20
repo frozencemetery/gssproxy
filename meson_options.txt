@@ -1,0 +1,24 @@
+option('hardening', type: 'boolean', value: false,
+       description: 'Whether to add extra hardening flags')
+option('gpp-default-behavior', type: 'combo', value: 'LOCAL_FIRST',
+       choices: ['LOCAL_FIRST', 'LOCAL_ONLY', 'REMOTE_FIRST', 'REMOTE_ONLY'],
+       description: 'Default that the gssproxy interposer plugin should use')
+option('gssidebug', type: 'boolean', value: false,
+       description: 'Whether to build with interposer debugging support')
+option('selinux', type: 'boolean', value: true,
+       description: 'Whether to build with selinux support')
+option('manpages', type: 'boolean', value: true,
+       description: 'Whether to regenerate man pages from DocBook sources')
+option('pid-file', type: 'string', value: '/var/run/gssproxy.pid',
+       description: 'Name of the gssproxy pid file')
+option('socket-name', type: 'string',
+       value: '/var/lib/gssproxy/default.sock',
+       description: 'Name of the gssproxy socket')
+option('pubconf-path', type: 'string', value: '/etc/gssproxy',
+       description: 'Where to store pubconf files for gssproxy')
+option('log-path', type: 'string', value: '/var/log/gssproxy',
+       description: 'Where to store log files for gssproxy')
+option('cc-path', type: 'string', value: '/var/run/user/gssproxy',
+       description: 'Where to store ccache files for gssproxy')
+option('distro-version', type: 'string', value: '',
+       description: 'Distro version number')
