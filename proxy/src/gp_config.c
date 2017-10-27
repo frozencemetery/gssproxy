@@ -798,20 +798,23 @@ static int gp_config_from_dir(const char *config_dir,
                              &error_list,
                              NULL);
     if (error_list) {
-        uint32_t len;
-        len = ref_array_len(error_list);
+        uint32_t len = ref_array_len(error_list);
         for (uint32_t i = 0; i < len; i++) {
             /* libini has an unfixable bug where error strings are (char **) */
-            GPAUDIT("Error when reading config directory: %s\n",
-                    *(char **)ref_array_get(error_list, i, NULL));
+            char *errmsg = *(char **)ref_array_get(error_list, i, NULL);
+
+            /* libini reports pattern match failure as (non-fatal) error
+             * https://pagure.io/SSSD/ding-libs/issue/3182 */
+            if (strstr(errmsg, "did not match provided patterns. Skipping")) {
+                continue;
+            }
+
+            GPAUDIT("Error when reading config directory: %s\n", errmsg);
         }
         ref_array_destroy(error_list);
     }
-
     if (ret && ret != EEXIST) {
         GPERROR("Error when reading config directory number: %d\n", ret);
-
-        ref_array_destroy(error_list);
         return ret;
     }
 
