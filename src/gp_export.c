@@ -244,6 +244,8 @@ done:
     return ret;
 }
 
+/* WARNING: krb5_c_decrypt() may pad the data with some enctypes!  Be sure to
+ * check your lengths. */
 static int gp_decrypt_buffer(krb5_context context, krb5_keyblock *key,
                              octet_string *in, size_t *len, void *buf)
 {
@@ -474,6 +476,10 @@ uint32_t gp_import_gssx_cred(uint32_t *min, struct gp_call_ctx *gpcall,
         GPDEBUG("Stored ccache failed to decrypt; treating as empty\n");
         goto done;
     }
+
+    /* Handle any padding from gp_decrypt_buffer() before presenting as a
+     * token. */
+    token.length = htonl(*(uint32_t *) token.value) + 4;
 
     ret_maj = gss_import_cred(&ret_min, &token, out);
     if (ret_maj) {
