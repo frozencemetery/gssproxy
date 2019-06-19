@@ -301,6 +301,7 @@ def write_ldap_krb5_config(testdir):
 
     k5schema = None
     for path in ["/usr/share/doc/krb5-server-ldap*/kerberos.schema",
+                 "/usr/share/kerberos/ldap/kerberos.schema",
                  "/usr/share/doc/krb5-kdc-ldap/kerberos.schema.gz"]:
         pathlist = glob.glob(path)
         if len(pathlist) > 0:
