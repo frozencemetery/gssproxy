@@ -367,7 +367,7 @@ def setup_ldap(testdir, wrapenv):
     stashfile = os.path.join(testdir, "ldap_passwd")
     krb5conf = os.path.join(testdir, 'krb5.conf')
 
-    ldapenv = {'PATH': '/sbin:/bin:/usr/sbin:/usr/bin',
+    ldapenv = {'PATH': '/sbin:/bin:/usr/sbin:/usr/bin:/usr/lib/mit/sbin',
                'KRB5_CONFIG': krb5conf}
     ldapenv.update(wrapenv)
 
@@ -411,7 +411,7 @@ def setup_kdc(testdir, wrapenv):
     kdcstash = os.path.join(kdcdir, KDC_STASH)
     kdcdb = os.path.join(kdcdir, KDC_DBNAME)
 
-    kdcenv = {'PATH': '/sbin:/bin:/usr/sbin:/usr/bin',
+    kdcenv = {'PATH': '/sbin:/bin:/usr/sbin:/usr/bin:/usr/lib/mit/sbin',
               'KRB5_CONFIG': krb5conf,
               'KRB5_KDC_PROFILE': kdcconf}
     kdcenv.update(wrapenv)
